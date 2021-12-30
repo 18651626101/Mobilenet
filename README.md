@@ -51,6 +51,7 @@ sh run_cudnn.sh
 GV100GL [Tesla V100 PCIe 32GB] 16.04.1-Ubuntu
 
 2.实验结果
+cuda优化加速后的结果（具体优化方法见文档）
 ```shell
 # 单次inference时间
 Average Time is: 7.713534
