@@ -3,7 +3,7 @@
 
 ## 文件结构
 ```text
-mobilenet/
+Mobilenet/
 +-- README.md
 +-- .gitignore
 +-- *_version/(模型实现代码，final_version下为最终实现)
