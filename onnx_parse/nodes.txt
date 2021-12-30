@@ -1,0 +1,733 @@
+Conv_0
+'input.1', '475', '476'
+'474'
+dilations 1, 1
+group 1
+kernel_shape 3, 3
+pads 1, 1, 1, 1
+strides 2, 2
+
+Clip_1
+'474'
+'317'
+max 6.0
+min 0.0
+
+Conv_2
+'317', '478', '479'
+'477'
+dilations 1, 1
+group 32
+kernel_shape 3, 3
+pads 1, 1, 1, 1
+strides 1, 1
+
+Clip_3
+'477'
+'320'
+max 6.0
+min 0.0
+
+Conv_4
+'320', '481', '482'
+'480'
+dilations 1, 1
+group 1
+kernel_shape 1, 1
+pads 0, 0, 0, 0
+strides 1, 1
+
+Conv_5
+'480', '484', '485'
+'483'
+dilations 1, 1
+group 1
+kernel_shape 1, 1
+pads 0, 0, 0, 0
+strides 1, 1
+
+Clip_6
+'483'
+'325'
+max 6.0
+min 0.0
+
+Conv_7
+'325', '487', '488'
+'486'
+dilations 1, 1
+group 96
+kernel_shape 3, 3
+pads 1, 1, 1, 1
+strides 2, 2
+
+Clip_8
+'486'
+'328'
+max 6.0
+min 0.0
+
+Conv_9
+'328', '490', '491'
+'489'
+dilations 1, 1
+group 1
+kernel_shape 1, 1
+pads 0, 0, 0, 0
+strides 1, 1
+
+Conv_10
+'489', '493', '494'
+'492'
+dilations 1, 1
+group 1
+kernel_shape 1, 1
+pads 0, 0, 0, 0
+strides 1, 1
+
+Clip_11
+'492'
+'333'
+max 6.0
+min 0.0
+
+Conv_12
+'333', '496', '497'
+'495'
+dilations 1, 1
+group 144
+kernel_shape 3, 3
+pads 1, 1, 1, 1
+strides 1, 1
+
+Clip_13
+'495'
+'336'
+max 6.0
+min 0.0
+
+Conv_14
+'336', '499', '500'
+'498'
+dilations 1, 1
+group 1
+kernel_shape 1, 1
+pads 0, 0, 0, 0
+strides 1, 1
+
+Add_15
+'489', '498'
+'339'
+
+Conv_16
+'339', '502', '503'
+'501'
+dilations 1, 1
+group 1
+kernel_shape 1, 1
+pads 0, 0, 0, 0
+strides 1, 1
+
+Clip_17
+'501'
+'342'
+max 6.0
+min 0.0
+
+Conv_18
+'342', '505', '506'
+'504'
+dilations 1, 1
+group 144
+kernel_shape 3, 3
+pads 1, 1, 1, 1
+strides 2, 2
+
+Clip_19
+'504'
+'345'
+max 6.0
+min 0.0
+
+Conv_20
+'345', '508', '509'
+'507'
+dilations 1, 1
+group 1
+kernel_shape 1, 1
+pads 0, 0, 0, 0
+strides 1, 1
+
+Conv_21
+'507', '511', '512'
+'510'
+dilations 1, 1
+group 1
+kernel_shape 1, 1
+pads 0, 0, 0, 0
+strides 1, 1
+
+Clip_22
+'510'
+'350'
+max 6.0
+min 0.0
+
+Conv_23
+'350', '514', '515'
+'513'
+dilations 1, 1
+group 192
+kernel_shape 3, 3
+pads 1, 1, 1, 1
+strides 1, 1
+
+Clip_24
+'513'
+'353'
+max 6.0
+min 0.0
+
+Conv_25
+'353', '517', '518'
+'516'
+dilations 1, 1
+group 1
+kernel_shape 1, 1
+pads 0, 0, 0, 0
+strides 1, 1
+
+Add_26
+'507', '516'
+'356'
+
+Conv_27
+'356', '520', '521'
+'519'
+dilations 1, 1
+group 1
+kernel_shape 1, 1
+pads 0, 0, 0, 0
+strides 1, 1
+
+Clip_28
+'519'
+'359'
+max 6.0
+min 0.0
+
+Conv_29
+'359', '523', '524'
+'522'
+dilations 1, 1
+group 192
+kernel_shape 3, 3
+pads 1, 1, 1, 1
+strides 1, 1
+
+Clip_30
+'522'
+'362'
+max 6.0
+min 0.0
+
+Conv_31
+'362', '526', '527'
+'525'
+dilations 1, 1
+group 1
+kernel_shape 1, 1
+pads 0, 0, 0, 0
+strides 1, 1
+
+Add_32
+'356', '525'
+'365'
+
+Conv_33
+'365', '529', '530'
+'528'
+dilations 1, 1
+group 1
+kernel_shape 1, 1
+pads 0, 0, 0, 0
+strides 1, 1
+
+Clip_34
+'528'
+'368'
+max 6.0
+min 0.0
+
+Conv_35
+'368', '532', '533'
+'531'
+dilations 1, 1
+group 192
+kernel_shape 3, 3
+pads 1, 1, 1, 1
+strides 2, 2
+
+Clip_36
+'531'
+'371'
+max 6.0
+min 0.0
+
+Conv_37
+'371', '535', '536'
+'534'
+dilations 1, 1
+group 1
+kernel_shape 1, 1
+pads 0, 0, 0, 0
+strides 1, 1
+
+Conv_38
+'534', '538', '539'
+'537'
+dilations 1, 1
+group 1
+kernel_shape 1, 1
+pads 0, 0, 0, 0
+strides 1, 1
+
+Clip_39
+'537'
+'376'
+max 6.0
+min 0.0
+
+Conv_40
+'376', '541', '542'
+'540'
+dilations 1, 1
+group 384
+kernel_shape 3, 3
+pads 1, 1, 1, 1
+strides 1, 1
+
+Clip_41
+'540'
+'379'
+max 6.0
+min 0.0
+
+Conv_42
+'379', '544', '545'
+'543'
+dilations 1, 1
+group 1
+kernel_shape 1, 1
+pads 0, 0, 0, 0
+strides 1, 1
+
+Add_43
+'534', '543'
+'382'
+
+Conv_44
+'382', '547', '548'
+'546'
+dilations 1, 1
+group 1
+kernel_shape 1, 1
+pads 0, 0, 0, 0
+strides 1, 1
+
+Clip_45
+'546'
+'385'
+max 6.0
+min 0.0
+
+Conv_46
+'385', '550', '551'
+'549'
+dilations 1, 1
+group 384
+kernel_shape 3, 3
+pads 1, 1, 1, 1
+strides 1, 1
+
+Clip_47
+'549'
+'388'
+max 6.0
+min 0.0
+
+Conv_48
+'388', '553', '554'
+'552'
+dilations 1, 1
+group 1
+kernel_shape 1, 1
+pads 0, 0, 0, 0
+strides 1, 1
+
+Add_49
+'382', '552'
+'391'
+
+Conv_50
+'391', '556', '557'
+'555'
+dilations 1, 1
+group 1
+kernel_shape 1, 1
+pads 0, 0, 0, 0
+strides 1, 1
+
+Clip_51
+'555'
+'394'
+max 6.0
+min 0.0
+
+Conv_52
+'394', '559', '560'
+'558'
+dilations 1, 1
+group 384
+kernel_shape 3, 3
+pads 1, 1, 1, 1
+strides 1, 1
+
+Clip_53
+'558'
+'397'
+max 6.0
+min 0.0
+
+Conv_54
+'397', '562', '563'
+'561'
+dilations 1, 1
+group 1
+kernel_shape 1, 1
+pads 0, 0, 0, 0
+strides 1, 1
+
+Add_55
+'391', '561'
+'400'
+
+Conv_56
+'400', '565', '566'
+'564'
+dilations 1, 1
+group 1
+kernel_shape 1, 1
+pads 0, 0, 0, 0
+strides 1, 1
+
+Clip_57
+'564'
+'403'
+max 6.0
+min 0.0
+
+Conv_58
+'403', '568', '569'
+'567'
+dilations 1, 1
+group 384
+kernel_shape 3, 3
+pads 1, 1, 1, 1
+strides 1, 1
+
+Clip_59
+'567'
+'406'
+max 6.0
+min 0.0
+
+Conv_60
+'406', '571', '572'
+'570'
+dilations 1, 1
+group 1
+kernel_shape 1, 1
+pads 0, 0, 0, 0
+strides 1, 1
+
+Conv_61
+'570', '574', '575'
+'573'
+dilations 1, 1
+group 1
+kernel_shape 1, 1
+pads 0, 0, 0, 0
+strides 1, 1
+
+Clip_62
+'573'
+'411'
+max 6.0
+min 0.0
+
+Conv_63
+'411', '577', '578'
+'576'
+dilations 1, 1
+group 576
+kernel_shape 3, 3
+pads 1, 1, 1, 1
+strides 1, 1
+
+Clip_64
+'576'
+'414'
+max 6.0
+min 0.0
+
+Conv_65
+'414', '580', '581'
+'579'
+dilations 1, 1
+group 1
+kernel_shape 1, 1
+pads 0, 0, 0, 0
+strides 1, 1
+
+Add_66
+'570', '579'
+'417'
+
+Conv_67
+'417', '583', '584'
+'582'
+dilations 1, 1
+group 1
+kernel_shape 1, 1
+pads 0, 0, 0, 0
+strides 1, 1
+
+Clip_68
+'582'
+'420'
+max 6.0
+min 0.0
+
+Conv_69
+'420', '586', '587'
+'585'
+dilations 1, 1
+group 576
+kernel_shape 3, 3
+pads 1, 1, 1, 1
+strides 1, 1
+
+Clip_70
+'585'
+'423'
+max 6.0
+min 0.0
+
+Conv_71
+'423', '589', '590'
+'588'
+dilations 1, 1
+group 1
+kernel_shape 1, 1
+pads 0, 0, 0, 0
+strides 1, 1
+
+Add_72
+'417', '588'
+'426'
+
+Conv_73
+'426', '592', '593'
+'591'
+dilations 1, 1
+group 1
+kernel_shape 1, 1
+pads 0, 0, 0, 0
+strides 1, 1
+
+Clip_74
+'591'
+'429'
+max 6.0
+min 0.0
+
+Conv_75
+'429', '595', '596'
+'594'
+dilations 1, 1
+group 576
+kernel_shape 3, 3
+pads 1, 1, 1, 1
+strides 2, 2
+
+Clip_76
+'594'
+'432'
+max 6.0
+min 0.0
+
+Conv_77
+'432', '598', '599'
+'597'
+dilations 1, 1
+group 1
+kernel_shape 1, 1
+pads 0, 0, 0, 0
+strides 1, 1
+
+Conv_78
+'597', '601', '602'
+'600'
+dilations 1, 1
+group 1
+kernel_shape 1, 1
+pads 0, 0, 0, 0
+strides 1, 1
+
+Clip_79
+'600'
+'437'
+max 6.0
+min 0.0
+
+Conv_80
+'437', '604', '605'
+'603'
+dilations 1, 1
+group 960
+kernel_shape 3, 3
+pads 1, 1, 1, 1
+strides 1, 1
+
+Clip_81
+'603'
+'440'
+max 6.0
+min 0.0
+
+Conv_82
+'440', '607', '608'
+'606'
+dilations 1, 1
+group 1
+kernel_shape 1, 1
+pads 0, 0, 0, 0
+strides 1, 1
+
+Add_83
+'597', '606'
+'443'
+
+Conv_84
+'443', '610', '611'
+'609'
+dilations 1, 1
+group 1
+kernel_shape 1, 1
+pads 0, 0, 0, 0
+strides 1, 1
+
+Clip_85
+'609'
+'446'
+max 6.0
+min 0.0
+
+Conv_86
+'446', '613', '614'
+'612'
+dilations 1, 1
+group 960
+kernel_shape 3, 3
+pads 1, 1, 1, 1
+strides 1, 1
+
+Clip_87
+'612'
+'449'
+max 6.0
+min 0.0
+
+Conv_88
+'449', '616', '617'
+'615'
+dilations 1, 1
+group 1
+kernel_shape 1, 1
+pads 0, 0, 0, 0
+strides 1, 1
+
+Add_89
+'443', '615'
+'452'
+
+Conv_90
+'452', '619', '620'
+'618'
+dilations 1, 1
+group 1
+kernel_shape 1, 1
+pads 0, 0, 0, 0
+strides 1, 1
+
+Clip_91
+'618'
+'455'
+max 6.0
+min 0.0
+
+Conv_92
+'455', '622', '623'
+'621'
+dilations 1, 1
+group 960
+kernel_shape 3, 3
+pads 1, 1, 1, 1
+strides 1, 1
+
+Clip_93
+'621'
+'458'
+max 6.0
+min 0.0
+
+Conv_94
+'458', '625', '626'
+'624'
+dilations 1, 1
+group 1
+kernel_shape 1, 1
+pads 0, 0, 0, 0
+strides 1, 1
+
+Conv_95
+'624', '628', '629'
+'627'
+dilations 1, 1
+group 1
+kernel_shape 1, 1
+pads 0, 0, 0, 0
+strides 1, 1
+
+Clip_96
+'627'
+'463'
+max 6.0
+min 0.0
+
+GlobalAveragePool_97
+'463'
+'464'
+
+Reshape_103
+'464', '471'
+'472'
+
+Gemm_104
+'472', 'classifier.1.weight', 'classifier.1.bias'
+'473'
+alpha 1.0
+beta 1.0
+transB 1
+
