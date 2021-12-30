@@ -5,8 +5,8 @@
 
 #define INPUTSHAPE 3 * 244 * 244
 #define OUTPUTSHAPE 1000
-#define TESTNUM 1
-#define ITERNUM 10
+#define TESTNUM 10
+#define ITERNUM 500
 #define DEBUG false
 double inputArr[TESTNUM][INPUTSHAPE];
 double benchOutArr[TESTNUM][OUTPUTSHAPE];
