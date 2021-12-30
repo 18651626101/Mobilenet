@@ -929,8 +929,6 @@ void inference(double *input, double *output)
     if(DEBUG) printf("========== main::begin inference ==========\n");
     double * image_g =NULL;
     double test_output[10];
-    // cudaMalloc((void**)&image_g, sizeof(double)*1*3*244*244);
-    // cudaMemcpy(image_g, input, sizeof(double)*1*3*244*244, cudaMemcpyHostToDevice);
     image_g = pad(3,244,1,input);
     conv(3,244,32,122,3,1,2,1,Conv_0_W,Conv_0_B,image_g,Conv_0_out,1);
     conv_group(32,122,32,122,3,1,1,1,Conv_2_W,Conv_2_B,image_g,Conv_2_out,0);

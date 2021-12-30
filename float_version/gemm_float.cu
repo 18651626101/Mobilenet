@@ -1,4 +1,4 @@
-#include "gemm.cuh"
+#include "gemm_float.cuh"
 struct Matrix
 {
 	int width;

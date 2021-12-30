@@ -1,4 +1,4 @@
-#include "conv_v2.cuh"
+#include "conv_v5.cuh"
 #define BLOCKSIZE 32
 using namespace std;
 

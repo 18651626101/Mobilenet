@@ -1,4 +1,4 @@
-#include "global_avg.cuh"
+#include "global_avg_float.cuh"
 #define BLOCKSIZE 32
 using namespace std;
 

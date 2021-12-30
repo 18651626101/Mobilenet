@@ -1,4 +1,4 @@
-#include "add.cuh"
+#include "add_float.cuh"
 #define BLOCKSIZE 32
 using namespace std;
 

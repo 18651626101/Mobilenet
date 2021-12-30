@@ -1,4 +1,4 @@
-#include "conv_v2.cuh"
+#include "conv_float.cuh"
 #define BLOCKSIZE 8
 using namespace std;
 
@@ -63,7 +63,7 @@ void conv(const int input_depth, const int input_width,
     const int filter_width,
     const int padding, const int stride, const int dilation,
     float* filter, float* bias,
-    float* &input, float* &output, int next_padding, const bool clip = true){
+    float* &input, float* &output, int next_padding, const bool clip){
     // printf("========== conv_malloc::begin conv ==========\n");
     float *img_cuda,*filter_cuda,*output_cuda,*bias_cuda; //img_cuda for padded tensor.
     int in_width=input_width+padding*2;
@@ -95,7 +95,7 @@ void conv_group(const int input_depth, const int input_width,
     const int filter_width,
     const int padding, const int stride, const int dilation,
     float* filter, float* bias,
-    float* &input, float* &output,int next_padding, const bool clip = true){
+    float* &input, float* &output,int next_padding, const bool clip){
     // printf("========== conv_v1::begin conv ==========\n");
     float *img_cuda,*filter_cuda,*output_cuda,*bias_cuda; //img_cuda for padded tensor.
     int in_width=input_width+padding*2;

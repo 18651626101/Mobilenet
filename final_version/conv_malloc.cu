@@ -10,22 +10,14 @@ using namespace std;
 __global__ void conv1Kernel(double *input,double *filter,double *output, double* bias, int filter_width,int filter_num,int input_width,int input_depth,int stride,int out_width, int next_padding, bool clip){
     int output_row = blockIdx.x*blockDim.x+threadIdx.x;
     int output_col = blockIdx.y*blockDim.y+threadIdx.y;
-    // int input_row = output_row*stride;
-    // int input_col = output_col*stride;
     if(output_row >= out_width || output_col >= out_width) return;
     out_width += next_padding * 2;
 
     int fnum = blockIdx.z;
     double tmp = 0.0;
-    // for(int r=0;r<filter_width;r++)
-    // for(int c=0;c<filter_width;c++)
     for(int d=0;d<input_depth;d++)
         tmp = tmp + input[d * input_width*input_width + (output_row)*input_width + output_col]*filter[fnum*input_depth + d];
-    // __syncthreads();
-    // if(threadIdx.z==0) {
-        tmp += bias[fnum];
-    //     __syncthreads();
-    // }
+    tmp += bias[fnum];
     if(clip){
         if(tmp < 0) tmp = 0.0;
         else if(tmp > 6) tmp = 6.0;
@@ -56,30 +48,6 @@ __global__ void convKernel(double *input,double *filter,double *output, double* 
     output[fnum*out_width*out_width + (output_row+next_padding)*out_width+output_col+next_padding] = tmp;
 }
 
-__global__ void conv1GroupKernel(double *input,double *filter,double *output, double* bias, int filter_width,int filter_num,int input_width,int input_depth,int stride,int out_width, int next_padding, bool clip){
-    int layer_idx = blockIdx.z;
-    int output_row = blockIdx.x*blockDim.x+threadIdx.x;
-    int output_col = blockIdx.y*blockDim.y+threadIdx.y;
-    // int input_row = output_row*stride;
-    // int input_col = output_col*stride;
-    if(output_row >= out_width || output_col >= out_width) return;
-    out_width += next_padding * 2;
-
-    
-        double tmp = 0.0;
-        // for(int r=0;r<filter_width;r++)
-        // for(int c=0;c<filter_width;c++){
-            tmp = input[layer_idx*input_width*input_width + (output_row)*input_width + output_col]*filter[layer_idx];
-        // }
-        
-        tmp += bias[layer_idx];
-        if(clip){
-            if(tmp < 0) tmp = 0.0;
-            else if(tmp > 6) tmp = 6.0;
-        }
-        output[layer_idx*out_width*out_width + (output_row+next_padding)*out_width+output_col+next_padding] = tmp;
-    
-}
 __global__ void convGroupKernel(double *input,double *filter,double *output, double* bias, int filter_width,int filter_num,int input_width,int input_depth,int stride,int out_width, int next_padding, bool clip){
     int layer_idx = blockIdx.z;
     int output_row = blockIdx.x*blockDim.x+threadIdx.x;
@@ -113,14 +81,11 @@ void conv(const int input_depth, const int input_width,
     const int padding, const int stride, const int dilation,
     double* filter, double* bias,
     double* &input, double* &output, int next_padding, const bool clip = true){
-    // printf("========== conv_malloc::begin conv ==========\n");
     double *img_cuda,*filter_cuda,*output_cuda,*bias_cuda; //img_cuda for padded tensor.
     int in_width=input_width+padding*2;
     int out_width=out_width_+next_padding*2;
     size_t outsize = sizeof(double)*filter_num*out_width*out_width;
     
-
-    // cudaMalloc(&output_cuda,outsize);
     output_cuda = output;
     cudaMemset(output_cuda, 0, outsize);
     filter_cuda = filter;
@@ -138,9 +103,7 @@ void conv(const int input_depth, const int input_width,
         convKernel<<<grid,threads>>>(img_cuda,filter_cuda,output_cuda,bias_cuda,filter_width,filter_num,in_width,input_depth,stride,out_width_, next_padding, clip);
     }
     
-    input = output_cuda;
-    // printf("========== conv_v1::end conv ==========\n");
-    
+    input = output_cuda;    
 }
 
 void conv_group(const int input_depth, const int input_width, 
@@ -149,34 +112,23 @@ void conv_group(const int input_depth, const int input_width,
     const int padding, const int stride, const int dilation,
     double* filter, double* bias,
     double* &input, double* &output,int next_padding, const bool clip = true){
-    // printf("========== conv_v1::begin conv ==========\n");
     double *img_cuda,*filter_cuda,*output_cuda,*bias_cuda; //img_cuda for padded tensor.
     int in_width=input_width+padding*2;
     int out_width=out_width_+next_padding*2;
     size_t outsize = sizeof(double)*filter_num*out_width*out_width;
 
-    // cudaMalloc(&output_cuda,outsize);
     output_cuda = output;
     cudaMemset(output_cuda,0, outsize);
     filter_cuda = filter;
     bias_cuda=bias;
-
     img_cuda = input;    
 
-    // dim3 threads(1, 1);
-    // dim3 grid(out_width_, out_width_, input_depth);
     int g=(out_width_+BLOCKSIZE-1)/BLOCKSIZE;
     dim3 threads(BLOCKSIZE, BLOCKSIZE);
     dim3 grid(g, g, filter_num);
-    // if(filter_width == 1)
-    //     conv1GroupKernel<<<grid,threads>>>(img_cuda,filter_cuda,output_cuda,bias_cuda,filter_width,filter_num,in_width,input_depth,stride,out_width_,next_padding,clip);
-    // else 
-        convGroupKernel<<<grid,threads>>>(img_cuda,filter_cuda,output_cuda,bias_cuda,filter_width,filter_num,in_width,input_depth,stride,out_width_,next_padding,clip);
+    convGroupKernel<<<grid,threads>>>(img_cuda,filter_cuda,output_cuda,bias_cuda,filter_width,filter_num,in_width,input_depth,stride,out_width_,next_padding,clip);
 
-    input = output;
-
-    // printf("========== conv_v1::end conv ==========\n");
-    
+    input = output;    
 }
 
 double* pad(const int input_depth, const int input_width, const int padding, double* input){
