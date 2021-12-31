@@ -1,5 +1,5 @@
 #include "gemm.cuh"
-
+#define BLOCKSIZE 32
 __global__ void matMulKernel(const int A_height, const int A_width, const int B_height, const int B_width, double *A, double *B, double *C, double *D)
 {
 	double Cvalue = 0.0;
@@ -20,7 +20,7 @@ void gemm(const int A_height, const int A_width, const int B_height, const int B
 			 double *MatrixA, double *MatrixB, double *bias, double *out)
 {
 
-	dim3 blockSize(32, 32);
+	dim3 blockSize(BLOCKSIZE, BLOCKSIZE);
 	dim3 gridSize((B_width + blockSize.x - 1) / blockSize.x,
 				  (A_height + blockSize.y - 1) / blockSize.y);
 

@@ -32,7 +32,7 @@ mobilenet/
     +-- mobilenet_v2_inplace.onnx
     +-- utils.py(解析onnx)
 +-- 答辩.pptx
-+-- 实验文档.pdf
++-- 文档.pdf
 ```
 ## 代码运行
 1.cuda实现版本执行
