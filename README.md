@@ -1,9 +1,9 @@
 # Mobilenet
-在本项目，我们使用cuda实现了经典的图卷积模型[Mobilenet](https://arxiv.org/pdf/1704.04861.pdf)。Mobilenet 采用depthwise separable convolution的方式代替传统的卷积，在维持一定准确性的同时，有效地提高了模型推理的速度。结合GPU运算和mobilenet一些性质，我们对计算过程，特别是卷积过程进行了优化和加速，并与cudnn实现的结果进行了对比，结果表明我们的实现速度要远快于cudnn的实现。
+在本项目，我们使用cuda实现了经典的图卷积模型[MobileNetV2](https://arxiv.org/pdf/1801.04381.pdf)版本。Mobilenet 采用depthwise separable convolution的方式代替传统的卷积，在维持一定准确性的同时，有效地提高了模型推理的速度。结合GPU运算和mobilenet一些性质，我们对计算过程，特别是卷积过程进行了优化和加速，并与cudnn实现的结果进行了对比，结果表明我们的实现速度要远快于cudnn的实现。
 
 ## 文件结构
 ```text
-mobilenet/
+Mobilenet/
 +-- README.md
 +-- .gitignore
 +-- *_version/(模型实现代码，final_version下为最终实现)
@@ -51,6 +51,7 @@ sh run_cudnn.sh
 GV100GL [Tesla V100 PCIe 32GB] 16.04.1-Ubuntu
 
 2.实验结果
+cuda优化加速后的结果（具体优化方法见文档）
 ```shell
 # 单次inference时间
 Average Time is: 7.713534
