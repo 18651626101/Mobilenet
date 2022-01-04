@@ -48,9 +48,11 @@ sh run_cudnn.sh
 ```
 ## 实验结果
 1.实验环境
+
 GV100GL [Tesla V100 PCIe 32GB] 16.04.1-Ubuntu
 
 2.实验结果
+
 cuda优化加速后的结果（具体优化方法见文档）
 ```shell
 # 单次inference时间
@@ -90,6 +92,7 @@ Average Time is: 10.748224
 ```
 
 3.cudnn baseline
+
 cudnn的实现中我们仅做了简单优化，运行速度相对较慢。后续更多可能的优化方法由于时间所限没有继续实验。详细分析见文档和报告。
 ```shell
 # 单次inference时间
