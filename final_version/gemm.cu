@@ -1,7 +1,10 @@
 #include "gemm.cuh"
 #define BLOCKSIZE 32
+
+/* matMulKernel: 矩阵乘法核函数*/
 __global__ void matMulKernel(const int A_height, const int A_width, const int B_height, const int B_width, double *A, double *B, double *C, double *D)
 {
+	//一个thread计算结果矩阵中的一个值
 	double Cvalue = 0.0;
 	int row = threadIdx.y + blockIdx.y * blockDim.y;
 	int col = threadIdx.x + blockIdx.x * blockDim.x;
@@ -16,6 +19,18 @@ __global__ void matMulKernel(const int A_height, const int A_width, const int B_
 	}
 }
 
+/* 
+ * gemm: 通用矩阵乘法操作
+ * params:
+ *   A_height: 矩阵A的高度
+ *   A_width: 矩阵A的高度
+ *   B_height: 矩阵B的高度
+ *   B_width: 矩阵B的宽度
+ *   MatrixA: 矩阵A，大小为 A_height*A_width
+ *   MatrixB: 矩阵B，大小为 B_height*B_width
+ *   bias: 偏置，大小为 A_height*B_with
+ *   out: 输出， 大小为 A_height*B_with
+ */
 void gemm(const int A_height, const int A_width, const int B_height, const int B_width,
 			 double *MatrixA, double *MatrixB, double *bias, double *out)
 {
@@ -27,7 +42,7 @@ void gemm(const int A_height, const int A_width, const int B_height, const int B
 	matMulKernel<<<gridSize, blockSize>>>(A_height, A_width, B_height, B_width, MatrixA, MatrixB, out, bias);
 }
 
-// int main()
+/* 调试函数 */
 // int test_gemm_main()
 // {
 // 	double *test_inputd;
@@ -71,52 +86,3 @@ void gemm(const int A_height, const int A_width, const int B_height, const int B
 // 	}
 // 	return 0;
 // // }
-
-// int test_gemm_main()
-// {
-// 	int width = w;
-// 	int height = w;
-
-// 	Matrix *A, *B, *C;
-
-// 	cudaMallocManaged((void**)&A, sizeof(Matrix));
-// 	cudaMallocManaged((void**)&B, sizeof(Matrix));
-// 	cudaMallocManaged((void**)&C, sizeof(Matrix));
-
-// 	int nBytes = width * height * sizeof(double);
-
-// 	cudaMallocManaged((void**)&A->elements, nBytes);
-// 	cudaMallocManaged((void**)&B->elements, nBytes);
-// 	cudaMallocManaged((void**)&C->elements, nBytes);
-
-// 	A->height = height;
-// 	A->width = width;
-// 	B->height = height;
-// 	B->width = width;
-// 	C->height = height;
-// 	C->width = width;
-
-// 	for (int i = 0; i < width * height; ++i)
-// 	{
-// 		A->elements[i] = 1.0;
-// 		B->elements[i] = 2.0;
-// 	}
-
-// 	dim3 blockSize(32, 32);
-// 	dim3 gridSize((width + blockSize.x - 1) / blockSize.x,
-// 		(height + blockSize.y - 1) / blockSize.y);
-
-// 	struct timeval t1,t2;
-// 	gettimeofday(&t1,NULL);
-// 	double timeuse;
-
-// 	matMulKernel << < gridSize, blockSize >> >(A, B, C);
-
-// 	cudaDeviceSynchronize();
-
-// 	gettimeofday(&t2,NULL);
-// 	timeuse = t2.tv_sec - t1.tv_sec + (t2.tv_usec - t1.tv_usec)/1000000.0;
-// 	printf("Use Time:%fs\n", timeuse);
-
-// 	return 0;
-// }
