@@ -11,6 +11,7 @@
 double inputArr[TESTNUM][INPUTSHAPE];
 double benchOutArr[TESTNUM][OUTPUTSHAPE];
 
+/* declaration of weights and bias */
 double* Conv_0_W;
 double* Conv_0_B;
 double* Conv_2_W;
@@ -120,6 +121,7 @@ double* Gemm_B;
 double* temp_h;
 double* temp_d;
 
+/* declaration of outputs */
 double* Conv_0_out;
 double* Conv_2_out;
 double* Conv_4_out;
@@ -206,25 +208,27 @@ void checkOutput(double *out1, double *out2)
     }
 }
 
+/* imgcpy: copy the image_g into a temperate pointer */
 double* imgcpy(double* image_g, int size)
 {
     double* residual_g = NULL;
-    // cudaMalloc((void**)&residual_g,sizeof(double)*size);
-    // cudaMemcpy(residual_g, image_g, sizeof(double)*size, cudaMemcpyDeviceToDevice);
     residual_g = image_g;
     return residual_g;
 }
 
+/* cudaMallocWithPadding: malloc memory on GPU for the image with padding */
 void cudaMallocWithPadding(double** img_p, int channel, int shape, int padding=0)
 {
     shape+=padding;
     cudaMalloc(img_p, sizeof(double)*channel*shape*shape*2);
 }
 
+/* initModel: init parameters for the model and malloc memory on GPU for them in advance */
 void initModel()
 {
     FILE *fp = NULL;
     fp = fopen("./params.txt", "r");
+
     temp_h = new double[32*3*3*3];
     for(int i=0;i<32*3*3*3;i++)fscanf(fp,"%lf",&temp_h[i]);
     cudaMalloc((void**)&temp_d, sizeof(double)*32*3*3*3);
@@ -849,8 +853,7 @@ void initModel()
     cudaMemcpy(temp_d, temp_h, sizeof(double)*1280, cudaMemcpyHostToDevice);
     Conv_95_B = temp_d;
     delete(temp_h);
-
-
+    
     double _;
     fscanf(fp,"%lf %lf",&_, &_); // const 1 -1
 
@@ -867,6 +870,7 @@ void initModel()
     Gemm_B = temp_d;
     delete(temp_h);
 
+    /* malloc memory on GPU for the outputs */
     cudaMallocWithPadding(&Conv_0_out,32,122,1);
     cudaMallocWithPadding(&Conv_2_out,32,122,1);
     cudaMallocWithPadding(&Conv_4_out,16,122);
@@ -923,13 +927,15 @@ void initModel()
     cudaMalloc(&Gemm_out,sizeof(double)*1000);
 }
 
-// TODO: 实现自己的inference
+/* inference:  implement the topology of the MobileNetV2 */
 void inference(double *input, double *output)
 {
     if(DEBUG) printf("========== main::begin inference ==========\n");
     double * image_g =NULL;
-    double test_output[10];
-    image_g = pad(3,244,1,input);
+
+    // malloc memory on GPU for the input and padding in advance
+    image_g = pad(3,244,1,input); 
+
     conv(3,244,32,122,3,1,2,1,Conv_0_W,Conv_0_B,image_g,Conv_0_out,1);
     conv_group(32,122,32,122,3,1,1,1,Conv_2_W,Conv_2_B,image_g,Conv_2_out,0);
     conv(32,122,16,122,1,0,1,1,Conv_4_W,Conv_4_B,image_g,Conv_4_out,0,false);
@@ -1002,16 +1008,12 @@ void inference(double *input, double *output)
     conv_group(960,8,960,8,3,1,1,1,Conv_92_W,Conv_92_B,image_g,Conv_92_out,0);
     conv(960,8,320,8,1,0,1,1,Conv_94_W,Conv_94_B,image_g,Conv_94_out,0,false);
     conv(320,8,1280,8,1,0,1,1,Conv_95_W,Conv_95_B,image_g,Conv_95_out,0);
+
     image_g = global_avg(image_g, 1280, 8);
-    // conv(1280,1,1000,1,1,0,1,1,Gemm_W,Gemm_B,image_g,Gemm_out,0,false);
     gemm(1000,1280,1280,1,Gemm_W, image_g, Gemm_B, Gemm_out);
 
-
+    // transfer the output from GPU to host
     cudaMemcpy(output, Gemm_out, sizeof(double)*1000, cudaMemcpyDeviceToHost);
-    // cudaMemcpy(test_output, image_g, sizeof(double)*1*1280*8*8, cudaMemcpyDeviceToHost);
-    // for(int i=0;i<1280*8*8;i++){
-    //     printf("%lf\n", test_output[i]);
-    // }
     if(DEBUG) printf("========== main::end inference ==========\n");
 }
 
