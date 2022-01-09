@@ -223,7 +223,7 @@ void cudaMallocWithPadding(double** img_p, int channel, int shape, int padding=0
     cudaMalloc(img_p, sizeof(double)*channel*shape*shape*2);
 }
 
-/* initModel: init parameters for the model and malloc memory on GPU for them in advance*/
+/* initModel: init parameters for the model and malloc memory on GPU for them in advance */
 void initModel()
 {
     FILE *fp = NULL;
